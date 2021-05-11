@@ -46,7 +46,7 @@ namespace ClassLibrary1
 
                 i++;
             }
-            // return
+            // returns
             return counter;
         }
     }
