@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="9c9d7e89-91b8-4b88-9f46-64dcc155a6d7" ChangeDateTime="04/05/2019 07:47:04">
+    <Property Name="ElementName" Value="[dbo].[Dim_Dtc_Event_Combinations].[FK_Assembly_Plant_ID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Dim_Dtc_Event_Combinations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Assembly_Plant_ID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bb7299dd-be3b-44bc-a3a3-c5e1acd9d927" ChangeDateTime="04/05/2019 07:47:07">
+    <Property Name="ElementName" Value="[dbo].[Dim_Dtc_Event_Combinations].[FK_Retail_Delivery_Country_Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Dim_Dtc_Event_Combinations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Retail_Delivery_Country_Id" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7f54f11a-81e7-499e-ba76-dc3ee370948b" ChangeDateTime="04/05/2019 07:47:09">
+    <Property Name="ElementName" Value="[dbo].[Dim_Dtc_Event_Combinations].[FK_MyQ_PNO_ID]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Dim_Dtc_Event_Combinations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="MyQ_PNO_ID" />
+  </Operation>
+</Operations>
