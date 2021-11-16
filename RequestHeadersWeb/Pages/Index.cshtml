@@ -1,0 +1,33 @@
+﻿@page
+@model RequestHeadersWeb.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<html>
+    <body>
+        <table class="table">
+            <tr>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.Headers.Name)*@
+                    Name
+                </th>
+                <th>
+                    @*@Html.DisplayNameFor(model => model.ValuesCombinedHTML)*@
+                    Headers
+                </th>
+            </tr>
+            @foreach (var item in Model.Headers)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.ValuesCombinedHTML
+                    </td>
+                </tr>
+            }
+        </table>
+    </body>
+</html>
