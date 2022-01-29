@@ -5,6 +5,8 @@
  *    https://docs.microsoft.com/en-us/visualstudio/ide/dotfuscator/install?view=vs-2019
  * 2. Find the path to dotfuscator.exe. On my computer: "c:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\Common7\IDE\Extensions\PreEmptiveSolutions\DotfuscatorCE\dotfuscator.exe" 
  *    
+ *    
+ *    https://www.preemptive.com/dotfuscator/pro/userguide/en/getting_started_protect.html
  */
 
 
