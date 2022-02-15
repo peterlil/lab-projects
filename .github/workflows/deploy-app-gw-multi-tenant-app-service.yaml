@@ -1,6 +1,13 @@
 # Deployment of the app-gw-multi-tenant-app-service solution
 
+# Pre-requisites:
+# Azure App Service for both the webapp and the apiapp
+
 name: deploy-app-gw-multi-tenant-app-service
 
 on: workflow_dispatch
 
+env:
+  LOCATION: westeurope
+
+jobs:
