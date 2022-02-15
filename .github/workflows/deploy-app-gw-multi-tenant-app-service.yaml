@@ -1,0 +1,6 @@
+# Deployment of the app-gw-multi-tenant-app-service solution
+
+name: deploy-app-gw-multi-tenant-app-service
+
+on: workflow_dispatch
+
