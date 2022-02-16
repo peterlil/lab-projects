@@ -5,11 +5,11 @@ name: deploy-app-gw-multi-tenant-app-service
 on: workflow_dispatch
 
 env:
-  AZURE_WEBAPP_PACKAGE_PATH: "./drop"
+  AZURE_WEBAPP_PACKAGE_PATH: ".\drop"
 
 jobs:
   deploy_apiapp:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Setup Dotnet 6.0.x
@@ -23,18 +23,18 @@ jobs:
       - name: dotnet build and publish
         run: |
           pwd
-          dotnet build ./app-gw-multi-tenant-app-service/apiapp/apiapp.csproj --configuration Release
-          dotnet publish ./app-gw-multi-tenant-app-service/apiapp/apiapp.csproj -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/apiapp'
+          dotnet build .\app-gw-multi-tenant-app-service\apiapp\apiapp.csproj --configuration Release
+          dotnet publish .\app-gw-multi-tenant-app-service\apiapp\apiapp.csproj -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}\apiapp'
 
       - name: deploy-apiapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: apiapp-666
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE__APIAPP }}
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/apiapp'
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}\apiapp'
 
   deploy_webapp:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - name: Setup Dotnet 6.0.x
@@ -48,8 +48,8 @@ jobs:
       - name: dotnet build and publish
         run: |
           pwd
-          dotnet build ./app-gw-multi-tenant-app-service/webapp/webapp.csproj --configuration Release
-          dotnet publish ./app-gw-multi-tenant-app-service/webapp/webapp.csproj -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/webapp'
+          dotnet build .\app-gw-multi-tenant-app-service\webapp\webapp.csproj --configuration Release
+          dotnet publish .\app-gw-multi-tenant-app-service\webapp\webapp.csproj -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}\webapp'
 
       - name: log in to azure
         uses: azure/login@v1
@@ -67,6 +67,8 @@ jobs:
         with:
           app-name: webapp-666
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE__WEBAPP }}
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/webapp'
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}\webapp'
+
+      
 
       
