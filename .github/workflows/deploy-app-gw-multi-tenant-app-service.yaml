@@ -84,7 +84,6 @@ jobs:
           creds: ${{ secrets.AZURE_CREDS_RG_LAB_PROJECTS }}
 
       - name: configure webapi ip restrictions
-        env: 
         run: |
           # Get all ips to allow
           ipString = az webapp show --resource-group $env.ResourceGroupName --name $env.WebAppName --query outboundIpAddresses --output tsv
