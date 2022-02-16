@@ -26,10 +26,17 @@ namespace webapp.Pages
             }
             else 
             {
-                HttpClient httpClient = new HttpClient { BaseAddress = new Uri(ApiUri) };
-                Task<string> taskReturn =  httpClient.GetStringAsync("/WeatherForecast");
-                taskReturn.Wait();
-                WeatherSummary = taskReturn.Result;
+                try
+                {
+                    HttpClient httpClient = new HttpClient { BaseAddress = new Uri(ApiUri) };
+                    Task<string> taskReturn =  httpClient.GetStringAsync("/WeatherForecast");
+                    taskReturn.Wait();
+                    WeatherSummary = taskReturn.Result;
+                }
+                catch (Exception ex)
+                {
+                    WeatherSummary = string.Format("Error when calling backend: {0}", ex.ToString());
+                }
             }
         }
 
