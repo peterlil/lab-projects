@@ -33,9 +33,12 @@ namespace webapp.Pages
                     taskReturn.Wait();
                     WeatherSummary = taskReturn.Result;
                 }
-                catch (Exception ex)
+                catch (AggregateException ex)
                 {
-                    WeatherSummary = string.Format("Error when calling backend: {0}", ex.ToString());
+                    foreach (var e in ex.InnerExceptions) {
+                        WeatherSummary += string.Format("Error when calling backend: {0} ### ", ex.ToString());                            
+                    }
+                    
                 }
             }
         }
