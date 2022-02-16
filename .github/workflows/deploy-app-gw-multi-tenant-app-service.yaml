@@ -51,6 +51,10 @@ jobs:
           dotnet build ./app-gw-multi-tenant-app-service/webapp/webapp.csproj --configuration Release
           dotnet publish ./app-gw-multi-tenant-app-service/webapp/webapp.csproj -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/webapp'
 
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDS_RG_LAB_PROJECTS }}
+          
       - uses: azure/appservice-settings@v1
         with:
           app-name: 'webapp-666'
