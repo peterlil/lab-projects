@@ -21,11 +21,16 @@ namespace webapp.Pages
         public void OnGet()
         {
             ApiUri = _configuration["BackendAPI"];
-
-            HttpClient httpClient = new HttpClient { BaseAddress = new Uri(ApiUri) };
-            Task<string> taskReturn =  httpClient.GetStringAsync("/WeatherForecast");
-            taskReturn.Wait();
-            WeatherSummary = taskReturn.Result;
+            if(string.IsNullOrEmpty(ApiUri)) {
+                WeatherSummary = "No backend configured";
+            }
+            else 
+            {
+                HttpClient httpClient = new HttpClient { BaseAddress = new Uri(ApiUri) };
+                Task<string> taskReturn =  httpClient.GetStringAsync("/WeatherForecast");
+                taskReturn.Wait();
+                WeatherSummary = taskReturn.Result;
+            }
         }
 
         public string ApiUri{ get; set; }
