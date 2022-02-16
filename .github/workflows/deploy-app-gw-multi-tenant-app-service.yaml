@@ -85,7 +85,7 @@ jobs:
       - name: configure webapi ip restrictions
         run: |
           # Get all ips to allow
-          $ipString = az webapp show --resource-group $env.ResourceGroupName --name $env.WebAppName --query outboundIpAddresses --output tsv
+          $ipString = az webapp show --resource-group ${{ env.ResourceGroupName }} --name ${{ env.WebAppName }} --query outboundIpAddresses --output tsv
           $ips = $ipString.Split(',')
           # $ips = @()
           # Get all Allow rules
