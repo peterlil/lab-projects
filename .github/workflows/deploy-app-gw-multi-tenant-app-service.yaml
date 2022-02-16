@@ -89,7 +89,7 @@ jobs:
           $ips = $ipString.Split(',')
           # $ips = @()
           # Get all Allow rules
-          $rules = az webapp config access-restriction show -g $env.ResourceGroupName -n $env.ApiAppName --query "ipSecurityRestrictions[?action=='Allow'].{name:name, priority:priority, action:action, ip_address:ip_address, remove:'true'}" -o json | ConvertFrom-Json
+          $rules = az webapp config access-restriction show -g ${{ env.ResourceGroupName }} -n ${{ env.ApiAppName }} --query "ipSecurityRestrictions[?action=='Allow'].{name:name, priority:priority, action:action, ip_address:ip_address, remove:'true'}" -o json | ConvertFrom-Json
 
           # Remove the rules that are not in the ip-list, and store the remaining priorities
           $prioList = @()
@@ -106,12 +106,12 @@ jobs:
               }
               if($rule.remove -eq "true") {
                   Write-Host "Removing $($rule.ip_address)"
-                  $result = az webapp config access-restriction remove -g $env.ResourceGroupName -n $env.ApiAppName --rule-name $rule.name
+                  $result = az webapp config access-restriction remove -g ${{ env.ResourceGroupName }} -n ${{ env.ApiAppName }} --rule-name $rule.name
               }
           }
 
           # Get all remaining Allow rules
-          $rules = az webapp config access-restriction show -g $env.ResourceGroupName -n $env.ApiAppName --query "ipSecurityRestrictions[?action=='Allow'].{name:name, action:action, ip_address:ip_address, remove:'true'}" -o json | ConvertFrom-Json
+          $rules = az webapp config access-restriction show -g ${{ env.ResourceGroupName }} -n ${{ env.ApiAppName }} --query "ipSecurityRestrictions[?action=='Allow'].{name:name, action:action, ip_address:ip_address, remove:'true'}" -o json | ConvertFrom-Json
           $prio = 100
           $ips | ForEach-Object {
               $ip = $_
@@ -129,7 +129,7 @@ jobs:
                       $prio++
                   }
                   Write-Host "Adding rule $ip/32 with priority $prio"
-                  $result = az webapp config access-restriction add -g $env.ResourceGroupName -n $env.ApiAppName --priority $prio --rule-name "ip-$ip" --action Allow --ip-address "$ip/32"
+                  $result = az webapp config access-restriction add -g ${{ env.ResourceGroupName }} -n ${{ env.ApiAppName }} --priority $prio --rule-name "ip-$ip" --action Allow --ip-address "$ip/32"
                   $prioList += $prio
               }
           }
