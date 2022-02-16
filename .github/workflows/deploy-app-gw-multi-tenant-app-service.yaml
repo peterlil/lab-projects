@@ -72,7 +72,6 @@ jobs:
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE__WEBAPP }}
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}\\webapp'
 
-
   api_fw_conf:
     runs-on: windows-latest
     needs: [deploy_apiapp, deploy_webapp]
@@ -86,7 +85,7 @@ jobs:
       - name: configure webapi ip restrictions
         run: |
           # Get all ips to allow
-          ipString = az webapp show --resource-group $env.ResourceGroupName --name $env.WebAppName --query outboundIpAddresses --output tsv
+          $ipString = az webapp show --resource-group $env.ResourceGroupName --name $env.WebAppName --query outboundIpAddresses --output tsv
           $ips = $ipString.Split(',')
           # $ips = @()
           # Get all Allow rules
