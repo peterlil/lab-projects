@@ -33,4 +33,35 @@ jobs:
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE__APIAPP }}
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/apiapp'
 
+  deploy_webapp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Dotnet 6.0.x
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+      
+      - name: Checkout the repo
+        uses: actions/checkout@main
+
+      - name: dotnet build and publish
+        run: |
+          pwd
+          dotnet build ./app-gw-multi-tenant-app-service/webapp/webapp.csproj --configuration Release
+          dotnet publish ./app-gw-multi-tenant-app-service/webapp/webapp.csproj -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/webapp'
+
+      - uses: azure/appservice-settings@v1
+        with:
+          app-name: 'webapp-666'
+          app-settings-json: '${{ secrets.WEBAPP666_APPSETTING_BACKENDAPI }}' 
+        id: settings
+
+      - name: deploy-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: webapp-666
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE__WEBAPP }}
+          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/webapp'
+
       
