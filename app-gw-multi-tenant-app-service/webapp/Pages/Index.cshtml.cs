@@ -21,6 +21,7 @@ namespace webapp.Pages
         public void OnGet()
         {
             ApiUri = _configuration["BackendAPI"];
+            CallingIp = string.Format("{0}:{1}", Request.HttpContext.Connection.RemoteIpAddress, Request.HttpContext.Connection.RemotePort);
             if(string.IsNullOrEmpty(ApiUri)) {
                 WeatherSummary = "No backend configured";
             }
@@ -44,6 +45,8 @@ namespace webapp.Pages
         }
 
         public string ApiUri{ get; set; }
+
+        public string CallingIp { get; set; }
 
         public string WeatherSummary { get; set; }
     }
