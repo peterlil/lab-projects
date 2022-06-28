@@ -1,8 +1,9 @@
 name: Build and deploy .NET Core app to Linux WebApp RequestHeadersWeb2021
-on:
-  push:
-    branches:
-    - main
+on: workflow_dispatch
+#on:
+#  push:
+#    branches:
+#    - main
 env:
   AZURE_WEBAPP_NAME: RequestHeadersWeb2021
   AZURE_WEBAPP_PACKAGE_PATH: ./publish

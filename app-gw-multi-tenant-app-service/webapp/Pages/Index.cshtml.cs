@@ -21,14 +21,32 @@ namespace webapp.Pages
         public void OnGet()
         {
             ApiUri = _configuration["BackendAPI"];
-
-            HttpClient httpClient = new HttpClient { BaseAddress = new Uri(ApiUri) };
-            Task<string> taskReturn =  httpClient.GetStringAsync("/WeatherForecast");
-            taskReturn.Wait();
-            WeatherSummary = taskReturn.Result;
+            CallingIp = string.Format("{0}:{1}", Request.HttpContext.Connection.RemoteIpAddress, Request.HttpContext.Connection.RemotePort);
+            if(string.IsNullOrEmpty(ApiUri)) {
+                WeatherSummary = "No backend configured";
+            }
+            else 
+            {
+                try
+                {
+                    HttpClient httpClient = new HttpClient { BaseAddress = new Uri(ApiUri) };
+                    Task<string> taskReturn =  httpClient.GetStringAsync("/WeatherForecast");
+                    taskReturn.Wait();
+                    WeatherSummary = taskReturn.Result;
+                }
+                catch (AggregateException ex)
+                {
+                    foreach (var e in ex.InnerExceptions) {
+                        WeatherSummary += string.Format("Error when calling backend: {0} ### ", ex.ToString());                            
+                    }
+                    
+                }
+            }
         }
 
         public string ApiUri{ get; set; }
+
+        public string CallingIp { get; set; }
 
         public string WeatherSummary { get; set; }
     }
