@@ -1,0 +1,75 @@
+# How to use
+
+## Register the Azure AD app for the API
+```PowerShell
+$appDisplayName='python_func_and_client_aad_auth'
+$tenantName='fdpo'
+$redirectUris = "http://localhost:7071"
+
+az ad app create --display-name $appDisplayName `
+    --web-redirect-uris $redirectUris `
+    --identifier-uris "https://$($appDisplayName).$($tenantName).onmicrosoft.com" `
+    --enable-access-token-issuance true `
+    --sign-in-audience AzureADMyOrg
+
+az ad app credential reset --id "08a8d261-c594-45f8-9028-f20170adf5fd" --display-name "client secret" --append
+
+```
+
+https://login.microsoftonline.com/fdpo.onmicrosoft.com/oauth2/v2.0/authorize?response_type=code&client_id=8998a100-c097-4d63-b54b-752f8183dcaa&redirect_uri=http://localhost:7071/api/python_func_aad_auth/&scope=openid
+
+http://localhost:7071/api/python_func_aad_auth/?code=0.ARoAE8CzFgDTjUasZH7aCCC20wChmImXwGNNtUt1L4GD3KoaAB8.AgABAAIAAAD--DLA3VO7QrddgJg7WevrAgDs_wQA9P_1fcaEGkaiS9SnuZqtxUKwzfGmjTL6ylNc3_7F6gDyX33Cb9vsL11X3ts4S56_RaysUja_kHILK9i3NiaGYnC-OZvx5ejD7wKjEL9ilIGN_Q6GJHnl4pgR1xHCV-aR0l6LkDsiuQOUI6OM7kNkump5oyUTP51g_xUngZ1i1uYaGuNmRYQWYxijl4lTlfQvIAk_k1LkjJkjqfzSHfqfLgvw18_--z4FwRyLM8EuKkYi1t7SQNBoUCDSP_5sXuuTPSRRl2GP_iL52ww0VENk-elyJUjsqDma8BVoFlSnAnR-UZEBrP6F2syIwQPc4Zq6RP8G_iP419iAepyA6gBzwXzaRiz2gDFOR6-q9lzhb8smPqLFWa4aLb7r3Co94c8zLnWdZiH9U83-EN9uYo_PJWORLqcU512eJUXMz8mHtUuFJY5-DgWwFNe5K7r3Fgm_OUO6UofpTZa8dbRWvHSf-3VHtO89d4QpvHf9SuHnLFWIcifokHZGMd5FT49tkmtcHXAg1RxqNH2Romashd_9r3Dlrw8wyg5oVLUWTVYOvUvlL7-Q-8qecxFpNlOBhAAyCRW-gFRIwjMs9qcnu2HUFW4Y2PrM92QsdgSZ8XZ6U1UXFubW7yhXzaZJp-9sdJzyCpjjMKAjyxXFePBC0CglDSW_HWmieZAGAdnL8DmESzb3ojqMJ5R63ioUJ0Wgtq_AJyiZGxumGxJjj2HCH6VmUsaCzy3oIKmRG_0ALKXyqv2xQm_3jHht5rqQABd4y2qViRU6nMMOYguSJQafdxepn5x3S84ZPzrgm_7L2mx9dRneZXBSq66hdYCtsa6AR8KmkYjbhVdjCJP-ALSAnQVSwY5fwLk1yi5r3ThVggEnwBjiFSZ_t9Da7s0R1TGmx-dIRDb6xt6E1cE0e8dc0iXRV5y-WJ3d66GKWo2zV4YCbjJWKumWcmRonps6WpjAZHrQgOJw-2i7IujioV5hs_M6lVXnJDub-u644X8UOqSke0evrW5FWZ_BwC6-FyiiAMqAHEWqrJewFNTykQTV4Me5n61yPlk2hmVllja_ZOc5u-o1TKm4_mo-NJ9H1P5zHw&session_state=464ad9dc-0872-42a0-beaf-0113b3e1830e
+
+
+curl -X POST \
+  https://login.microsoftonline.com/fdpo.onmicrosoft.com/oauth2/v2.0/token \
+  -H 'Accept: */*' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H 'Host: login.microsoftonline.com' \
+  -H 'accept-encoding: gzip, deflate' \
+  -H 'cache-control: no-cache' \
+  -d 'redirect_uri=http%3A%2F%2Flocalhost:7071%2Fapi%2Fpython_func_aad_auth%2F&client_id=8998a100-c097-4d63-b54b-752f8183dcaa&grant_type=authorization_code&code=0.ARoAE8CzFgDTjUasZH7aCCC20wChmImXwGNNtUt1L4GD3KoaAB8.AgABAAIAAAD--DLA3VO7QrddgJg7WevrAgDs_wQA9P_1fcaEGkaiS9SnuZqtxUKwzfGmjTL6ylNc3_7F6gDyX33Cb9vsL11X3ts4S56_RaysUja_kHILK9i3NiaGYnC-OZvx5ejD7wKjEL9ilIGN_Q6GJHnl4pgR1xHCV-aR0l6LkDsiuQOUI6OM7kNkump5oyUTP51g_xUngZ1i1uYaGuNmRYQWYxijl4lTlfQvIAk_k1LkjJkjqfzSHfqfLgvw18_--z4FwRyLM8EuKkYi1t7SQNBoUCDSP_5sXuuTPSRRl2GP_iL52ww0VENk-elyJUjsqDma8BVoFlSnAnR-UZEBrP6F2syIwQPc4Zq6RP8G_iP419iAepyA6gBzwXzaRiz2gDFOR6-q9lzhb8smPqLFWa4aLb7r3Co94c8zLnWdZiH9U83-EN9uYo_PJWORLqcU512eJUXMz8mHtUuFJY5-DgWwFNe5K7r3Fgm_OUO6UofpTZa8dbRWvHSf-3VHtO89d4QpvHf9SuHnLFWIcifokHZGMd5FT49tkmtcHXAg1RxqNH2Romashd_9r3Dlrw8wyg5oVLUWTVYOvUvlL7-Q-8qecxFpNlOBhAAyCRW-gFRIwjMs9qcnu2HUFW4Y2PrM92QsdgSZ8XZ6U1UXFubW7yhXzaZJp-9sdJzyCpjjMKAjyxXFePBC0CglDSW_HWmieZAGAdnL8DmESzb3ojqMJ5R63ioUJ0Wgtq_AJyiZGxumGxJjj2HCH6VmUsaCzy3oIKmRG_0ALKXyqv2xQm_3jHht5rqQABd4y2qViRU6nMMOYguSJQafdxepn5x3S84ZPzrgm_7L2mx9dRneZXBSq66hdYCtsa6AR8KmkYjbhVdjCJP-ALSAnQVSwY5fwLk1yi5r3ThVggEnwBjiFSZ_t9Da7s0R1TGmx-dIRDb6xt6E1cE0e8dc0iXRV5y-WJ3d66GKWo2zV4YCbjJWKumWcmRonps6WpjAZHrQgOJw-2i7IujioV5hs_M6lVXnJDub-u644X8UOqSke0evrW5FWZ_BwC6-FyiiAMqAHEWqrJewFNTykQTV4Me5n61yPlk2hmVllja_ZOc5u-o1TKm4_mo-NJ9H1P5zHw&client_secret=URr8Q~3eyw.BtfM8q~iujFGQKtq3KqovmM35obNS&scope=https%3A%2F%2Fpython_func_and_client_aad_auth.fdpo.onmicrosoft.com%2Fuser_impersonation'
+
+
+curl -X GET \
+    http://localhost:7071/api/python_func_aad_auth \
+    -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiJodHRwczovL3B5dGhvbl9mdW5jX2FuZF9jbGllbnRfYWFkX2F1dGguZmRwby5vbm1pY3Jvc29mdC5jb20iLCJpc3MiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC8xNmIzYzAxMy1kMzAwLTQ2OGQtYWM2NC03ZWRhMDgyMGI2ZDMvIiwiaWF0IjoxNjY0NDU1NzAyLCJuYmYiOjE2NjQ0NTU3MDIsImV4cCI6MTY2NDQ2MTM1OCwiYWNyIjoiMSIsImFpbyI6IkFhUUFXLzhUQUFBQTVmdyszcnJTWk1YdXQ1bHpVRm13OFJ3Q3h0NUNZdGJoQ1F2bTJ6WVV5WWVYRWUrdWkwWVpTUGVTWWxQUjRWT1ZhNzFCaVQybEFibStnZi85NUNjKzRGQVZJV25lQm81RUVNZVZkbWJ2cnpEa0ZSeGZNekhrdzdZa1lpN3VaanF5RVJmcUtma1ZNVlB2dkp2K0JrSmVKZkVFeTk1c3Fxb0FjNzBrRjNIdklZbThmZkF6T3RBQTJjT3V0Nkd3N2F2UWE2UVg4ejBiUittSTdLQUF4RnlHWGc9PSIsImFtciI6WyJyc2EiLCJtZmEiXSwiYXBwaWQiOiI4OTk4YTEwMC1jMDk3LTRkNjMtYjU0Yi03NTJmODE4M2RjYWEiLCJhcHBpZGFjciI6IjEiLCJlbWFpbCI6IlBldGVyLkxpbGplbnJvdGhAbWljcm9zb2Z0LmNvbSIsImZhbWlseV9uYW1lIjoiTGlsamVucm90aCIsImdpdmVuX25hbWUiOiJQZXRlciIsImlkcCI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0LzcyZjk4OGJmLTg2ZjEtNDFhZi05MWFiLTJkN2NkMDExZGI0Ny8iLCJpcGFkZHIiOiI3OS4xMzYuNzIuMTI4IiwibmFtZSI6IlBldGVyIExpbGplbnJvdGgiLCJvaWQiOiJmMGYzYTZmOC1lMDYyLTRkYjUtYTc1Mi0yODFjNzJjZjU5ZmYiLCJyaCI6IjAuQVVZQUU4Q3pGZ0RUalVhc1pIN2FDQ0MyMHdDaG1JbVh3R05OdFV0MUw0R0QzS3FBQUI4LiIsInNjcCI6InVzZXJfaW1wZXJzb25hdGlvbiIsInN1YiI6IlItVnJxbVFvaDJXdnJ2czJnRkN6S2ZkbFlhZENleWxyTGdhbktHVHQ5RFUiLCJ0aWQiOiIxNmIzYzAxMy1kMzAwLTQ2OGQtYWM2NC03ZWRhMDgyMGI2ZDMiLCJ1bmlxdWVfbmFtZSI6IlBldGVyLkxpbGplbnJvdGhAbWljcm9zb2Z0LmNvbSIsInV0aSI6ImhhUmI3TlQ4NUVpV3FLQXpzN0lUQUEiLCJ2ZXIiOiIxLjAifQ.hfBDSavODTyDI8kHle-PE2tPzNVAIdmms6ZzvkCetBq6wn_rV7c0i8oEvsTjJyTzBSLiivzX1eoxdR6Dj0RJP3qZjiL7LykFyUuchGqF-VHzzzwRSNrNh7kGo5k5JKzVTfZ9orvfCS5My8V2wcs-tvX3cwvmkYHmaX7BwT6ERRyrcUxw_IZzt0N0YXHfrk4Gj0oSBmh6MXK3aJuZuuGImj7tJ7QV7xLJbLOOmh5GFUHjqh07Zpb-KCVjYuSuv3OGxHF0nu5j3QnPf4CP0uZOhc8ceiCnZkW0ZgUc1jj0IldBYrwfizFDUPh_foCQ2hbFA_JWpMcMyXKvl2Ciq3ynpg","id_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IjJaUXBKM1VwYmpBWVhZR2FYRUpsOGxWMFRPSSJ9.eyJhdWQiOiI4OTk4YTEwMC1jMDk3LTRkNjMtYjU0Yi03NTJmODE4M2RjYWEiLCJpc3MiOiJodHRwczovL2xvZ2luLm1pY3Jvc29mdG9ubGluZS5jb20vMTZiM2MwMTMtZDMwMC00NjhkLWFjNjQtN2VkYTA4MjBiNmQzL3YyLjAiLCJpYXQiOjE2NjQ0NTU3MDIsIm5iZiI6MTY2NDQ1NTcwMiwiZXhwIjoxNjY0NDU5NjAyLCJpZHAiOiJodHRwczovL3N0cy53aW5kb3dzLm5ldC83MmY5ODhiZi04NmYxLTQxYWYtOTFhYi0yZDdjZDAxMWRiNDcvIiwicmgiOiIwLkFVWUFFOEN6RmdEVGpVYXNaSDdhQ0NDMjB3Q2htSW1Yd0dOTnRVdDFMNEdEM0txQUFCOC4iLCJzdWIiOiJSLVZycW1Rb2gyV3ZydnMyZ0ZDektmZGxZYWRDZXlsckxnYW5LR1R0OURVIiwidGlkIjoiMTZiM2MwMTMtZDMwMC00NjhkLWFjNjQtN2VkYTA4MjBiNmQzIiwidXRpIjoiaGFSYjdOVDg1RWlXcUtBenM3SVRBQSIsInZlciI6IjIuMCJ9.o_qiy7SNKO1b4f5DEtttJFVtUrG_nUShLUEL0jkX8Nsdyl6KR5iWzJGAtXEgiOjmx6urxWw3jQv6hVEbXjGGexJFt2eEkkKgiXYD6CQy57KMfDEe7HeZZ-nJnIRwMP7dmX8vTulEJUK9kAT9PeM9pPIPvTE861ECbmUC2zyucxahLU8lRsyGlE10Q6HD7CVdo8_q9se8sb4520oqRyXVguEZW42P9-IY3TRhapRARoKRhZ7pUkPKuCuZKVqtgJuRh16VWTm4oefanp6CZiTr-p-p2IYmAlBtrI8Hb8VgiRzkubwpdvUx4fs4g1-26rZkphC7l41J-7zmiQ8fLuKVvQ'
+
+```PowerShell
+$appDisplayName='python_func_aad_auth'
+$tenantName='fdpo'
+$redirectUris = "http://localhost:7071"
+
+# Make sure you have app-roles-manifest.json in same directory.
+az ad app create --display-name $appDisplayName `
+    --web-redirect-uris $redirectUris `
+    --identifier-uris "https://$($appDisplayName).$($tenantName).onmicrosoft.com" `
+    --enable-access-token-issuance true `
+    --sign-in-audience AzureADMyOrg `
+    --app-roles @app-roles-manifest.json
+```
+
+## Register the Azure AD app for the (simulated) web client
+
+```PowerShell
+$appDisplayName='python_func_client'
+$tenantName='fdpo'
+$redirectUris = "http://localhost:8080"
+
+# Note: GitHub article is wrong, replace --reply-urls with --web-redirect-uris
+az ad app create --display-name $appDisplayName `
+    --web-redirect-uris $redirectUris `
+    --identifier-uris "https://$($appDisplayName).$($tenantName).onmicrosoft.com" `
+    --enable-access-token-issuance true `
+    --sign-in-audience AzureADMyOrg
+
+```
+
+
+
+### References
+https://github.com/Azure-Samples/ms-identity-python-webapi-azurefunctions
+Note: GitHub article is wrong, replace --reply-urls with --web-redirect-uris
+
