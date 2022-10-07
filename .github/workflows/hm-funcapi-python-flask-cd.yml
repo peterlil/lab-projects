@@ -50,13 +50,13 @@ jobs:
         shell: bash
         run: |
           PUBLISH_PROFILE=$(az webapp deployment list-publishing-profiles -g ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.AZURE_FUNCTIONAPP_NAME }} --query "[?profileName=='${{ env.AZURE_FUNCTIONAPP_NAME }} - Web Deploy'] | [0]")
-          echo "::add-mask::$PUBLISH_PROFILE"
-          echo "::set-output name=publish-profile::$PUBLISH_PROFILE"
+          #echo "::add-mask::$PUBLISH_PROFILE"
+          #echo "::set-output name=publish-profile::$PUBLISH_PROFILE"
 
-      - name: 'Package and publish'
-        uses: Azure/functions-action@v1
-        id: fa
-        with:
-          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
-          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
-          publish-profile: ${{ steps.get-publish-profile.outputs.publish-profile }}
+#      - name: 'Package and publish'
+#        uses: Azure/functions-action@v1
+#        id: fa
+#        with:
+#          app-name: ${{ env.AZURE_FUNCTIONAPP_NAME }}
+#          package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
+#          publish-profile: ${{ steps.get-publish-profile.outputs.publish-profile }}
