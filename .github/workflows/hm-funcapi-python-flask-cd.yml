@@ -9,7 +9,7 @@ env:
 
 jobs:
 
-  deploy function infra:
+  deploy-function-infra:
      # use a linux runner for bicep deployments
     runs-on: ubuntu-latest
 
@@ -31,9 +31,9 @@ jobs:
             -f main.bicep \
             -p main.parameters.json
 
-  deploy function app:
+  deploy-function-app:
     runs-on: ubuntu-latest
-    depends-on: deploy function infra
+    needs: deploy-function-infra
 
     steps:
       - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
