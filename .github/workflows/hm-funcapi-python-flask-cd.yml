@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           PUBLISH_PROFILE=$(az webapp deployment list-publishing-profiles -g ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.AZURE_FUNCTIONAPP_NAME }} --query "[?profileName=='${{ env.AZURE_FUNCTIONAPP_NAME }} - Web Deploy'] | [0]")
-          #echo "::add-mask::$PUBLISH_PROFILE"
+          echo "::add-mask::$PUBLISH_PROFILE"
           #echo "::set-output name=publish-profile::$PUBLISH_PROFILE"
 
 #      - name: 'Package and publish'
