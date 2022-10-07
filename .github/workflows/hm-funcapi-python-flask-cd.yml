@@ -1,0 +1,27 @@
+name: hm-funcapi-python-flask-cd
+
+on: workflow_dispatch
+
+jobs:
+
+  build-and-deploy:
+     # use a linux runner for bicep deployments
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@v3
+        with:
+          ref: 'main'
+
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.FUNCAPI_PYTHON_FLASK_CD }}
+
+      - run: |
+          cd ./funcapi-python-flask/bicep
+          az deployment sub create \
+            --location 'centralus' \
+            --name 'full-deployment-'$(date "+%Y-%m-%d_%H%M%S") \
+            -f main.bicep \
+            -p main.parameters.json
