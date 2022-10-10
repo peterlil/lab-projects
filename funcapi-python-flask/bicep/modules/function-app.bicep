@@ -108,3 +108,58 @@ resource fnApp 'Microsoft.Web/sites@2022-03-01' = {
     }
   }
 }
+
+resource symbolicname 'Microsoft.Web/sites/config@2022-03-01' = {
+  name: 'authsettingsV2'
+  parent: fnApp
+  properties: {
+    globalValidation: {
+      requireAuthentication: true
+      unauthenticatedClientAction: 'Return401'
+    }
+    httpSettings: {
+      forwardProxy: {
+        convention: 'NoProxy'
+      }
+      requireHttps: true
+      routes: {
+        apiPrefix: '/.auth'
+      }
+    }
+    identityProviders: {
+      azureActiveDirectory: {
+        enabled: true
+        login: {
+          disableWWWAuthenticate: false
+        }
+        registration: {
+          clientId: '1dc4c222-ca93-4a48-9c25-59fed9bb9e3d'
+          clientSecretSettingName: 'MICROSOFT_PROVIDER_AUTHENTICATION_SECRET'
+          openIdIssuer: 'https://sts.windows.net/16b3c013-d300-468d-ac64-7eda0820b6d3/v2.0'
+        }
+        validation: {
+          allowedAudiences: []
+          defaultAuthorizationPolicy: {
+            allowedPrincipals: { }
+          }
+          jwtClaimChecks: { }
+        }
+      }
+    }
+    login: {
+      cookieExpiration: {
+        convention: 'FixedTime'
+        timeToExpiration: '08:00:00'
+      }
+      nonce: {
+        nonceExpirationInterval: '00:05:00'
+        validateNonce: true
+      }
+      routes: { }
+    }
+    platform: {
+      enabled: true
+      runtimeVersion: '~1'
+    }
+  }
+}
