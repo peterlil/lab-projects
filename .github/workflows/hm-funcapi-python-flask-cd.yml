@@ -1,7 +1,12 @@
 name: hm-funcapi-python-flask-cd
 
-on: workflow_dispatch
-
+on: 
+  # workflow_dispatch
+  push:
+    branches:
+      - 'main'
+      - 'funcapi-python-flask/**'
+      
 env: 
   PYTHON_VERSION: 3.9
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './funcapi-python-flask/'
