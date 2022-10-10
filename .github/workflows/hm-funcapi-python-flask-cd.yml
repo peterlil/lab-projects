@@ -45,8 +45,9 @@ jobs:
 
       - name: 'Deploy Key Vault'
         run: |
-          az account show --query "user.name" -o tsv > user.txt
-          cat user.txt
+          cdUser=$(az account show --query "user.name" -o tsv)
+          az ad app list --display-name funcapi-python-flask-cd --query "[0].[id]" -o tsv
+          
           #cd ./funcapi-python-flask/bicep
           #az deployment sub create \
           #  --location 'centralus' \
