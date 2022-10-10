@@ -1,0 +1,42 @@
+name: hm-funcapi-python-flask-cd
+
+on: 
+  # workflow_dispatch
+  push:
+    branches:
+      - 'main'
+
+env: 
+  PYTHON_VERSION: 3.9
+  AZURE_FUNCTIONAPP_PACKAGE_PATH: './funcapi-python-flask/'
+  AZURE_FUNCTIONAPP_NAME: 'hmapfunca'
+  AZURE_RESOURCE_GROUP: 'hm-assortment-profiling-a'
+  APPREG_DISPLAY_NAME: 'funcapi-python-flask-no-secret'
+
+jobs:
+
+#  create-user-and-deploy-keyvault:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: azure/login@v1
+#        with:
+#          creds: ${{ secrets.FUNCAPI_PYTHON_FLASK_CD }}
+#
+#      - name: Create the user
+#        run: |
+        
+
+  deploy-function-infra:
+     # use a linux runner for bicep deployments
+    runs-on: ubuntu-latest
+#    needs: create-user-and-deploy-keyvault
+
+    steps:
+      - uses: azure/login@v1
+        with:
+          creds: ${{ secrets.FUNCAPI_PYTHON_FLASK_CD }}
+      - name: 'script'
+        run: |
+          az ad app list --display-name funcapi-python-flask-cd --query "[0].[id]" -o tsv
+
