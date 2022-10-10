@@ -16,9 +16,22 @@ env:
 
 jobs:
 
+#  create-user-and-deploy-keyvault:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: azure/login@v1
+#        with:
+#          creds: ${{ secrets.FUNCAPI_PYTHON_FLASK_CD }}
+#
+#      - name: Create the user
+#        run: |
+        
+
   deploy-function-infra:
      # use a linux runner for bicep deployments
     runs-on: ubuntu-latest
+    needs: create-user-and-deploy-keyvault
 
     steps:
       - name: 'Checkout GitHub Action'
@@ -29,6 +42,16 @@ jobs:
       - uses: azure/login@v1
         with:
           creds: ${{ secrets.FUNCAPI_PYTHON_FLASK_CD }}
+
+      - name: 'Deploy Key Vault'
+        run: |
+          az account show --query "user.name" --o tsv
+          #cd ./funcapi-python-flask/bicep
+          #az deployment sub create \
+          #  --location 'centralus' \
+          #  --name 'full-deployment-'$(date "+%Y-%m-%d_%H%M%S") \
+          #  -f main.bicep \
+          #  -p main.parameters.json
 
       - name: 'Deploy Function App Infrastructure' 
         run: |
