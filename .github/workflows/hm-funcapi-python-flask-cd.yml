@@ -31,7 +31,7 @@ jobs:
   deploy-function-infra:
      # use a linux runner for bicep deployments
     runs-on: ubuntu-latest
-    needs: create-user-and-deploy-keyvault
+#    needs: create-user-and-deploy-keyvault
 
     steps:
       - name: 'Checkout GitHub Action'
