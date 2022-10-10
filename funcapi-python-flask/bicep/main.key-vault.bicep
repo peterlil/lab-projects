@@ -3,7 +3,7 @@ targetScope = 'subscription'
 // Resource group
 param location string
 param resourceGroupName string
-param keyVaultName string
+param userObjectId string
 
 
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
@@ -20,7 +20,8 @@ module funcApp 'modules/keyvault.bicep' = {
     enabledForDiskEncryption: false
     enabledForTemplateDeployment: false
     keyVaultName: 'akv${uniqueString(resourceGroupName)}'
-    objectIdOfUser: me 
+    objectIdOfUser: userObjectId
+    sku: 'standard'
   }
 }
 
@@ -29,6 +30,6 @@ module funcApp 'modules/keyvault.bicep' = {
 az deployment sub create `
   --location 'centralus' `
   --name "full-deployment-$(Get-Date -format 'yyyy-MM-dd_hhmmss')" `
-  -f main.bicep `
-  -p main.parameters.json
+  -f main.key-vault.bicep `
+  -p main.key-vault.parameters.json
 */

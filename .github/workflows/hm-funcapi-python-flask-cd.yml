@@ -45,15 +45,13 @@ jobs:
 
       - name: 'Deploy Key Vault'
         run: |
-          cdUser=$(az account show --query "user.name" -o tsv)
-          az ad app list --display-name funcapi-python-flask-cd --query "[0].[id]" -o tsv
-          
-          #cd ./funcapi-python-flask/bicep
-          #az deployment sub create \
-          #  --location 'centralus' \
-          #  --name 'full-deployment-'$(date "+%Y-%m-%d_%H%M%S") \
-          #  -f main.bicep \
-          #  -p main.parameters.json
+          cd ./funcapi-python-flask/bicep
+          az deployment sub create \
+            --location 'centralus' \
+            --name 'full-deployment-'$(date "+%Y-%m-%d_%H%M%S") \
+            -f main.key-vault.bicep \
+            -p main.key-vault.parameters.json \
+            -p userObjectId=${{ secrets.FUNCAPI_PYTHON_FLASK_CD_OBJECT_ID }}
 
       - name: 'Deploy Function App Infrastructure' 
         run: |
