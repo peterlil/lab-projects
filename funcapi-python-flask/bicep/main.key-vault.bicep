@@ -20,7 +20,7 @@ module funcApp 'modules/keyvault.bicep' = {
     enabledForDiskEncryption: false
     enabledForTemplateDeployment: false
     keyVaultName: 'akv${uniqueString(resourceGroupName)}'
-    //objectIdOfUser: 
+    objectIdOfUser: me
   }
 }
 
