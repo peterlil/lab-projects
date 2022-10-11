@@ -36,7 +36,7 @@ jobs:
       - name: 'Deploy Function App Infrastructure' 
         run: |
           cd ./funcapi-python-flask/bicep
-          $tenantName='${{ end.AZURE_TENANT_ID }}'
+          $tenantName='${{ env.AZURE_TENANT_ID }}'
           
           az deployment sub create \
             --location 'centralus' \
