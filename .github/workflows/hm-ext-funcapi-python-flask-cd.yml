@@ -42,7 +42,7 @@ jobs:
             --name 'full-deployment-'$(date "+%Y-%m-%d_%H%M%S") \
             -f main.bicep \
             -p main.parameters.json \
-            -p ${{ env.EXT_FUNCAPI_PYTHON_FLASK_CLIENT_CLIENTID }}
+            -p appRegClientId=${{ env.EXT_FUNCAPI_PYTHON_FLASK_CLIENT_CLIENTID }}
 
       - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
         uses: actions/setup-python@v1
