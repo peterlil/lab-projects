@@ -4,7 +4,7 @@
     "parameters": {
         "location":             { "value": "centralus" },
         "resourceGroupName":    { "value": "hm-assortment-profiling-a" },
-        "fnAppName":            { "value": "hmapfunca" },
+        "fnAppNamePrefix":      { "value": "func-app-" },
         "appInsightsName":      { "value": "hmapappinsightsa" },
         "laWsName":             { "value": "hmaplawsa" }
     }
