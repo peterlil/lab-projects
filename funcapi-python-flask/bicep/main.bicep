@@ -6,6 +6,7 @@ param resourceGroupName string
 param fnAppName string
 param appInsightsName string
 param laWsName string
+param appRegClientId string
 
 
 
@@ -22,6 +23,7 @@ module funcApp 'modules/function-app.bicep' = {
     fnAppName: fnAppName
     laWsName: laWsName
     location: rg.location
+    appRegClientId: appRegClientId
   }
 }
 

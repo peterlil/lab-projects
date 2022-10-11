@@ -2,6 +2,7 @@ param fnAppName string
 param location string
 param laWsName string
 param appInsightsName string
+param appRegClientId string
 
 var hostingPlanName = '${fnAppName}-plan'
 
@@ -133,7 +134,7 @@ resource symbolicname 'Microsoft.Web/sites/config@2022-03-01' = {
           disableWWWAuthenticate: false
         }
         registration: {
-          clientId: '1dc4c222-ca93-4a48-9c25-59fed9bb9e3d'
+          clientId: appRegClientId
           clientSecretSettingName: 'MICROSOFT_PROVIDER_AUTHENTICATION_SECRET'
           openIdIssuer: 'https://sts.windows.net/16b3c013-d300-468d-ac64-7eda0820b6d3/v2.0'
         }
