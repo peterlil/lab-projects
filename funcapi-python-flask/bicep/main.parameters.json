@@ -3,9 +3,9 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location":             { "value": "centralus" },
-        "resourceGroupName":    { "value": "hm-assortment-profiling-a" },
-        "fnAppNamePrefix":      { "value": "func-app-" },
-        "appInsightsName":      { "value": "hmapappinsightsa" },
+        "resourceGroupName":    { "value": "hm-assortment-profiling" },
+        "fnAppName":            { "value": "hm-func-app" },
+        "appInsightsName":      { "value": "hmapappinsights" },
         "laWsName":             { "value": "hmaplawsa" }
     }
 }

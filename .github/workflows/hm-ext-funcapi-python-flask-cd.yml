@@ -11,8 +11,8 @@ on:
 env: 
   PYTHON_VERSION: 3.9
   AZURE_FUNCTIONAPP_PACKAGE_PATH: './funcapi-python-flask/'
-  AZURE_FUNCTIONAPP_NAME: 'hmapfuncb'
-  AZURE_RESOURCE_GROUP: 'hm-assortment-profiling-b'
+  AZURE_FUNCTIONAPP_NAME: 'ext-hm-funcapi-python-flask'
+  AZURE_RESOURCE_GROUP: 'ext-hm-assortment-profiling'
   APPREG_DISPLAY_NAME: 'funcapi-python-flask-api'
   AZURE_TENANT_ID: 'MngEnv319828'
 
@@ -42,7 +42,9 @@ jobs:
             --name 'full-deployment-'$(date "+%Y-%m-%d_%H%M%S") \
             -f main.bicep \
             -p main.parameters.json \
-            -p appRegClientId=${{ env.EXT_FUNCAPI_PYTHON_FLASK_CLIENT_CLIENTID }}
+            -p appRegClientId=${{ env.EXT_FUNCAPI_PYTHON_FLASK_CLIENT_CLIENTID }} \
+              fnAppName=${{ env.AZURE_FUNCTIONAPP_NAME }} \
+              resourceGroupName=${{ env.AZURE_RESOURCE_GROUP }}
 
       - name: Setup Python ${{ env.PYTHON_VERSION }} Environment
         uses: actions/setup-python@v1

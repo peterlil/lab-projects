@@ -3,7 +3,7 @@ targetScope = 'subscription'
 // Resource group
 param location string
 param resourceGroupName string
-param fnAppNamePrefix string
+param fnAppName string
 param appInsightsName string
 param laWsName string
 param appRegClientId string
@@ -20,7 +20,7 @@ module funcApp 'modules/function-app.bicep' = {
   name: 'Function-App'
   params: {
     appInsightsName: appInsightsName
-    fnAppNamePrefix: fnAppNamePrefix
+    fnAppName: fnAppName
     laWsName: laWsName
     location: rg.location
     appRegClientId: appRegClientId

@@ -1,11 +1,11 @@
-param fnAppNamePrefix string
+param fnAppName string
 param location string
 param laWsName string
 param appInsightsName string
 param appRegClientId string
 
 var solutionUniqueString = uniqueString('${tenant().tenantId}${subscription().id}${resourceGroup().id}')
-var hostingPlanName = '${fnAppNamePrefix}${solutionUniqueString}-plan'
+var hostingPlanName = '${fnAppName}-plan'
 
 resource logAnalyticsWs 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: laWsName
@@ -59,7 +59,7 @@ resource hostingPlan 'Microsoft.Web/serverfarms@2022-03-01' = {
 }
 
 resource fnApp 'Microsoft.Web/sites@2022-03-01' = {
-  name: '${fnAppNamePrefix}${solutionUniqueString}'
+  name: fnAppName
   location: location
   kind: 'functionapp'
   tags:{
@@ -97,7 +97,7 @@ resource fnApp 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'WEBSITE_CONTENTSHARE'
-          value: toLower('${fnAppNamePrefix}${solutionUniqueString}')
+          value: toLower('${fnAppName}')
         }
       ]
       cors:{
