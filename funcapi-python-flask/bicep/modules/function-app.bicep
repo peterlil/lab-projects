@@ -5,6 +5,7 @@ param appInsightsName string
 param appRegClientId string
 
 var hostingPlanName = '${fnAppName}-plan'
+var solutionUniqueString = uniqueString('${tenant().tenantId}${subscription().id}${resourceGroup().id}')
 
 resource logAnalyticsWs 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   name: laWsName
@@ -29,7 +30,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
 }
 
 resource sa 'Microsoft.Storage/storageAccounts@2022-05-01' = {
-  name: 'azf${uniqueString(fnAppName)}'
+  name: 'azf${solutionUniqueString}'
   location: location
   sku: {
     name: 'Standard_LRS'
