@@ -42,7 +42,7 @@ jobs:
             --name 'full-deployment-'$(date "+%Y-%m-%d_%H%M%S") \
             -f main.bicep \
             -p main.parameters.json \
-            -p appRegClientId=${{ env.EXT_FUNCAPI_PYTHON_FLASK_CLIENT_CLIENTID }} \
+            -p appRegClientId=${{ secret.EXT_FUNCAPI_PYTHON_FLASK_CLIENT_CLIENTID }} \
               fnAppName=${{ env.AZURE_FUNCTIONAPP_NAME }} \
               resourceGroupName=${{ env.AZURE_RESOURCE_GROUP }}
 
