@@ -1,12 +1,12 @@
 name: hm-ext-funcapi-python-flask-cd
 
 on: 
-  workflow_dispatch
   push:
     branches:
       - 'main'
     paths:
       - 'funcapi-python-flask/**'
+  workflow_dispatch:
 
 env: 
   PYTHON_VERSION: 3.9
