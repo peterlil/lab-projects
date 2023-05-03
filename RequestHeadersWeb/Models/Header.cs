@@ -34,6 +34,7 @@ namespace RequestHeadersWeb.Models
         public Header()
         {
             Values = new List<string>();
+            Name="";
         }
     }
     
