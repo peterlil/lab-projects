@@ -1,5 +1,5 @@
 {
-  "image": "mcr.microsoft.com/devcontainers/dotnet:7.0",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:6.0",
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {
       "installBicep": true  
@@ -12,8 +12,7 @@
   		"extensions": [
   			"ms-azuretools.vscode-dapr",
   			"VisualStudioExptTeam.vscodeintellicode",
-  			"GitHub.copilot",
-  			"GitHub.copilot-labs",
+  			"GitHub.copilot-nightly",
   			"ms-azuretools.vscode-docker",
   			"ms-dotnettools.csharp",
   			"ms-azuretools.vscode-bicep",
