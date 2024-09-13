@@ -1,0 +1,9 @@
+langchain
+langchain-openai
+openai
+pyodbc
+fastapi
+uvicorn[standard]
+pydantic
+azure-identity
+langchain_community
