@@ -22,7 +22,14 @@ docker build -t "${imageBaseName}:$tag" . # --progress=plain
 docker tag "${imageBaseName}:$tag" "${registry}.azurecr.io/${imageBaseName}:${tag}"
 
 # run the container
-docker run -d -p 8443:443 -e ASPNETCORE_Kestrel__Certificates__Default__Password="scAm1()3@WCz5sSKVI82" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/petsapi-dev.peterlabs.net.pfx -v $env:USERPROFILE\.aspnet\https:/https/  --name $imageBaseName "${imageBaseName}:${tag}"
+docker run -d `
+    -p 8443:443 `
+    -e ASPNETCORE_ENVIRONMENT=DockerDevelopment `
+    -e ASPNETCORE_Kestrel__Certificates__Default__Password="scAm1()3@WCz5sSKVI82" `
+    -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/petsapi-dev.peterlabs.net.pfx `
+    -v $env:USERPROFILE\.aspnet\https:/https/ `
+    --name $imageBaseName `
+    "${imageBaseName}:${tag}"
 
 
 ```
@@ -34,7 +41,7 @@ $rootPath = "C:\src\github\peterlil\lab-projects\apis\pets\src"
 $registry = "plapis"
 $repository = "petsapi"
 $imageBaseName = "petsapi"
-$tag = "1.0"
+$tag = "1.6"
 
 cd $rootPath
 
@@ -42,10 +49,10 @@ cd $rootPath
 docker build -t "${imageBaseName}:$tag" .
 
 # tag the image
-docker tag "${imageBaseName}:latest" "${registry}.azurecr.io/${imageBaseName}:${tag}"
+docker tag "${imageBaseName}:$tag" "${registry}.azurecr.io/${imageBaseName}:${tag}"
 
 # Login to Azure Container Registry
-az acr login --name $registry
+#az acr login --name $registry
 
 # Push the image to Azure Container Registry
 docker push "${registry}.azurecr.io/${imageBaseName}:${tag}"
