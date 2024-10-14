@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoatsApi", "boats\src\Boats
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BoatsDB", "boats\BoatsDB\BoatsDB.sqlproj", "{759C40CA-76C6-478F-8243-7DCC1A6C35C6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheContentApi", "cachecontent\src\CacheContentApi.csproj", "{2A8653CE-D06F-460B-8DDA-2AC9384B3627}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2A8653CE-D06F-460B-8DDA-2AC9384B3627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8653CE-D06F-460B-8DDA-2AC9384B3627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8653CE-D06F-460B-8DDA-2AC9384B3627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8653CE-D06F-460B-8DDA-2AC9384B3627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
