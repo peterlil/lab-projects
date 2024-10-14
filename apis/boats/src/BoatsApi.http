@@ -1,0 +1,6 @@
+@BoatsApi_HostAddress = http://localhost:5268
+
+GET {{BoatsApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

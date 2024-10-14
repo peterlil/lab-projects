@@ -3,10 +3,10 @@
 ## Build the image and run the project locally as a container
 
 ```powershell
-$rootPath = "C:\src\github\peterlil\lab-projects\apis\pets\src"
+$rootPath = "C:\src\github\peterlil\lab-projects\apis\boats\src"
 $registry = "plapis"
-$repository = "petsapi"
-$imageBaseName = "petsapi"
+$repository = "boatsapi"
+$imageBaseName = "boatsapi"
 $tag = "1.0"
 
 cd $rootPath
@@ -26,7 +26,7 @@ docker run -d `
     -p 8443:443 `
     -e ASPNETCORE_ENVIRONMENT=DockerDevelopment `
     -e ASPNETCORE_Kestrel__Certificates__Default__Password="<pfx password>" `
-    -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/petsapi-dev.peterlabs.net.pfx `
+    -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/boatsapi-dev.peterlabs.net.pfx `
     -v $env:USERPROFILE\.aspnet\https:/https/ `
     --name $imageBaseName `
     "${imageBaseName}:${tag}"
@@ -37,11 +37,11 @@ docker run -d `
 ## Build the image and push it to the container registry
 
 ```powershell
-$rootPath = "C:\src\github\peterlil\lab-projects\apis\pets\src"
+$rootPath = "C:\src\github\peterlil\lab-projects\apis\boats\src"
 $registry = "plapis"
-$repository = "petsapi"
-$imageBaseName = "petsapi"
-$tag = "1.8"
+$repository = "boatsapi"
+$imageBaseName = "boatsapi"
+$tag = "1.0"
 
 cd $rootPath
 

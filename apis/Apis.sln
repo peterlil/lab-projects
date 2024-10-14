@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetsApi", "pets\src\PetsApi
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "PetsDB", "pets\PetsDB\PetsDB.sqlproj", "{C701B1D8-A388-4E22-A2BD-CCA5C37447AF}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BoatsApi", "boats\src\BoatsApi.csproj", "{A5EABA2E-2C17-4F4F-96D6-94A8D40A839E}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BoatsDB", "boats\BoatsDB\BoatsDB.sqlproj", "{759C40CA-76C6-478F-8243-7DCC1A6C35C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +27,16 @@ Global
 		{C701B1D8-A388-4E22-A2BD-CCA5C37447AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C701B1D8-A388-4E22-A2BD-CCA5C37447AF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C701B1D8-A388-4E22-A2BD-CCA5C37447AF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A5EABA2E-2C17-4F4F-96D6-94A8D40A839E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5EABA2E-2C17-4F4F-96D6-94A8D40A839E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5EABA2E-2C17-4F4F-96D6-94A8D40A839E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5EABA2E-2C17-4F4F-96D6-94A8D40A839E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{759C40CA-76C6-478F-8243-7DCC1A6C35C6}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

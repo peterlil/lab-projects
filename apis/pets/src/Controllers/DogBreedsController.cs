@@ -6,7 +6,7 @@ using PetsApi.Models;
 namespace PetsApi.Controllers
 {
     [ApiController]
-    [Route("pets/dogs/breeds")]
+    [Route("dogs/breeds")]
     public class DogBreedsController : ControllerBase
     {
         private readonly PetsDbContext _context;
