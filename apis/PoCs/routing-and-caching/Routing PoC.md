@@ -148,7 +148,7 @@ curl -X GET "https://plapim.azure-api.net/cache/storevalue?key=en_us&value=eohga
 Now that we got the key/value-pair above in the cache, we will use it to solve the routing of this frontend request:
 
 ```http
-GET https://plapim.azure-api.net/garments/jackets HTTP/1.1
+GET https://plapim.azure-api.net/garments/jackets2 HTTP/1.1
 Host: plapim.azure-api.net
 locale: sv_se
 ```
@@ -202,8 +202,8 @@ Below is the policy to achieve this:
 </policies>
 ```
 
-### Test the caching and routing
 
+### Test the caching and routing
 
 ```http
 GET https://plapim.azure-api.net/garments/jackets2 HTTP/1.1
@@ -216,9 +216,4 @@ GET https://plapim.azure-api.net/garments/jackets2 HTTP/1.1
 Host: plapim.azure-api.net
 locale: en_us
 ```
-
-
-Ta bara suffix för uppslag
-Appenda allt efteråt + locale
-
 
