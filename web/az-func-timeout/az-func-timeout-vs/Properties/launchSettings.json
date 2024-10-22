@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "az_func_timeout_vs": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7174",
+      "launchBrowser": false
+    }
+  }
+}
