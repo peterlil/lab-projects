@@ -1,0 +1,2 @@
+GET https://plapim.azure-api.net/jackets HTTP/1.1
+locale: sv_se

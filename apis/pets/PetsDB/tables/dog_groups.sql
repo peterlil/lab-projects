@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[dog_groups]
+(
+	[id] INT NOT NULL IDENTITY(1,1),
+	[name] NVARCHAR(100) NOT NULL,
+	CONSTRAINT [pk_dog_groups] PRIMARY KEY ([id]) WITH (DATA_COMPRESSION = PAGE)
+)
