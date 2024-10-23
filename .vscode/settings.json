@@ -1,3 +1,4 @@
 {
-    "azureFunctions.projectSubpath": "AzureFunctionTest1"
+    "azureFunctions.projectSubpath": "AzureFunctionTest1",
+    "dotnet.defaultSolution": "disable"
 }
