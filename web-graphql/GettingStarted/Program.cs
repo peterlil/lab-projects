@@ -1,13 +1,9 @@
-using wgql.QueryTypes;
-
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-    .AddGraphQLServer()
-    .AddTypes();
+builder.AddGraphQL().AddTypes();
 
 var app = builder.Build();
 
 app.MapGraphQL();
 
-app.Run();
+app.RunWithGraphQLCommands(args);

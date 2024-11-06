@@ -2,9 +2,10 @@ using wgql.Models;
 
 namespace wgql.QueryTypes;
 
-public class Query
+[QueryType]
+public static class Query
 {
-    public Book GetBook() =>
+    public static Book GetBook() =>
         new Book
         {
             Title = "C# in depth.",
